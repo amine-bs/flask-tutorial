@@ -3,7 +3,7 @@ from flask import Flask, render_template, request
 from utils import load_device, load_model, predict, load_image
 from PIL import Image
 import os
-
+from werkzeug.middleware.proxy_fix import ProxyFix
 
 
 def read_image(file):
@@ -11,6 +11,10 @@ def read_image(file):
     return img
 
 app = Flask(__name__)
+
+app.wsgi_app = ProxyFix(
+    app.wsgi_app, x_for=1, x_proto=1, x_host=1, x_prefix=1
+)
 
 device = load_device()
 model = load_model(device)
