@@ -1,6 +1,6 @@
 from io import BytesIO
 from flask import Flask, render_template, request
-from utils import load_device, load_model, predict, load_image, import_model
+from utils import load_device, predict, load_image, import_model
 from PIL import Image
 import os
 import base64
