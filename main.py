@@ -6,7 +6,7 @@ import os
 import base64
 from werkzeug.middleware.proxy_fix import ProxyFix
 
-import_model(Bucket="mbenxsalha", Key="diffusion/model.pth", Filename="model_2.pth")
+import_model(bucket="mbenxsalha", key="diffusion/model.pth", filename="model_2.pth")
 
 def read_image(file):
     img = Image.open(BytesIO(file)).convert("RGB")
