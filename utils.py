@@ -3,10 +3,17 @@ from PIL import Image
 import torch
 import torch.nn.functional as F
 import torchvision.transforms.functional as TF
+import boto3
 
 IMG_EXTENSIONS = [
     '.jpg', '.JPG', '.jpeg', '.JPEG',
     '.png', '.PNG', '.ppm', '.PPM', '.bmp', '.BMP']
+
+def import_model(path):
+    s3 = boto3.client('s3',endpoint_url='https://minio.lab.sspcloud.fr/')
+    s3.download_file(Bucket="mbenxsalha", Key="diffusion/model.pth", Filename="model_2.pth")
+
+    
 
 def load_model(device, path="model.pth"):
     model = ResNet()
