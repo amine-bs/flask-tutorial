@@ -1,11 +1,12 @@
 from io import BytesIO
 from flask import Flask, render_template, request
-from utils import load_device, load_model, predict, load_image
+from utils import load_device, load_model, predict, load_image, import_model
 from PIL import Image
 import os
 import base64
 from werkzeug.middleware.proxy_fix import ProxyFix
 
+import_model(Bucket="mbenxsalha", Key="diffusion/model.pth", Filename="model_2.pth")
 
 def read_image(file):
     img = Image.open(BytesIO(file)).convert("RGB")
@@ -16,7 +17,7 @@ app = Flask(__name__)
 app.wsgi_app = ProxyFix(app.wsgi_app, x_for=1, x_proto=1, x_host=1, x_prefix=1)
 
 device = load_device()
-model = load_model(device)
+model = load_model(device, path="model_2.pth")
 
 
 @app.route("/", methods=["GET", "POST"])
