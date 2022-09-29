@@ -6,7 +6,6 @@ import os
 import base64
 from werkzeug.middleware.proxy_fix import ProxyFix
 
-import_model(bucket="mbenxsalha", key="diffusion/model.pth", filename="model_2.pth")
 
 def read_image(file):
     img = Image.open(BytesIO(file)).convert("RGB")
@@ -17,7 +16,7 @@ app = Flask(__name__)
 app.wsgi_app = ProxyFix(app.wsgi_app, x_for=1, x_proto=1, x_host=1, x_prefix=1)
 
 device = load_device()
-model = load_model(device, path="model_2.pth")
+model = import_model(bucket="mbenxsalha", key="diffusion/state_dict.pickle", device=device)
 
 
 @app.route("/", methods=["GET", "POST"])
