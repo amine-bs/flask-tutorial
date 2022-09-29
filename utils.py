@@ -9,9 +9,9 @@ IMG_EXTENSIONS = [
     '.jpg', '.JPG', '.jpeg', '.JPEG',
     '.png', '.PNG', '.ppm', '.PPM', '.bmp', '.BMP']
 
-def import_model(path):
+def import_model(bucket, key, filename="model.pth"):
     s3 = boto3.client('s3',endpoint_url='https://minio.lab.sspcloud.fr/')
-    s3.download_file(Bucket="mbenxsalha", Key="diffusion/model.pth", Filename="model_2.pth")
+    s3.download_file(Bucket=bucket, Key=key, Filename=filename)
 
     
 
