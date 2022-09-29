@@ -16,7 +16,7 @@ def import_model(bucket, key, filename="model.pth"):
     
 
 def load_model(device, path="model.pth"):
-    model = ResNet()
+    model = ResNet(pretrained=False)
     model = model.to(device)
     model.load_state_dict(torch.load(path, map_location=device))
     model.eval()
